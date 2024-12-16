@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (usedWords.has(userWord)) {
             return "You already used this word.";
         }
-        if (userWord.slice(0, 1) !== generatedWord.slice(-1)) {
-            return `The word must start with '${generatedWord.slice(-1)}' but starts with '${userWord.slice(0, 1)}'.`;
+        if (userWord.charAt(0) !== generatedWord.charAt(generatedWord.length - 1)) {
+            return `The word must start with '${generatedWord.charAt(generatedWord.length - 1)}' but starts with '${userWord.charAt(0)}'.`;
         }
         return true;
     }
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("error-message").textContent = "";
 
             // Update the word list based on the last letter of the user's word
-            const newGeneratedWord = userWord.slice(-1);
+            const newGeneratedWord = userWord.charAt(userWord.length - 1);
             wordlist = wordlist.filter(word => word.startsWith(newGeneratedWord));
 
             if (wordlist.length > 0) {
