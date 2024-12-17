@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let usedWords = new Set();
     let lives = 3;
 
-    const playerScores = JSON.parse(localStorage.getItem("playerScores")) || {};
-
     // DOM Elements
     const generatedWordEl = document.getElementById("generated-word");
     const historyEl = document.getElementById("history");
@@ -25,10 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const userWordInput = document.getElementById("user-word");
     const gameForm = document.getElementById("game-form");
 
-    const modal = document.getElementById("score-modal");
-    const closeModalBtn = document.querySelector(".close");
-    const saveScoreBtn = document.getElementById("save-score-btn");
-    const playerNameInput = document.getElementById("player-name");
+    // Load Game State
+    function loadGameState() {
+        const savedState = JSON.parse(localStorage.getItem("gameState"));
+        if (savedState) {
+            history = savedState.history || [];
+            lives = savedState.lives || 3;
+            generatedWord = savedState.generatedWord || "start";
+        } else {
+            history = [];
+            lives = 3;
+            generatedWord = "start";
+        }
+    }
+
+    // Save Game State
+    function saveGameState() {
+        localStorage.setItem("gameState", JSON.stringify({
+            history: history,
+            lives: lives,
+            generatedWord: generatedWord
+        }));
+    }
 
     function getRandomWord() {
         return wordlist[Math.floor(Math.random() * wordlist.length)];
@@ -38,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         generatedWordEl.textContent = `The generated word is: ${generatedWord}`;
         historyEl.textContent = `History: ${history.join(" -> ")}`;
         livesEl.textContent = `Lives: ${lives}`;
+        saveGameState(); // Save state after every update
     }
 
     function validateWord(userWord) {
@@ -53,12 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return true;
     }
-
-    window.onclick = (event) => {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
 
     gameForm.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -81,20 +92,38 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             errorMessageEl.textContent = validation;
-            lives -= 1;
-
-            if (lives === 0) {
-                handleGameOver("Game over! You've run out of lives.", history.length);
+            if (lives > 0) {
+                lives -= 1;
+                if (lives === 0) {
+                    handleGameOver("Game over! You've run out of lives.", history.length);
+                }
             }
         }
         updateGameState();
         userWordInput.value = "";
     });
 
+    function handleGameOver(message, score) {
+        alert(`${message} Your score: ${score}`);
+        resetGameState();
+    }
+
+    function resetGameState() {
+        history = [];
+        usedWords = new Set();
+        lives = 3;
+        generatedWord = getRandomWord();
+        saveGameState();
+        updateGameState();
+    }
+
     // Initialize the game
+    loadGameState();
     loadAndCleanWordlist("wordlist.txt").then(cleanedWords => {
         wordlist = cleanedWords;
-        generatedWord = getRandomWord();
+        if (generatedWord === "start") {
+            generatedWord = getRandomWord(); // Only generate a word if it's a fresh game
+        }
         updateGameState();
     });
 });
