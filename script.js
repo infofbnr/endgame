@@ -123,3 +123,39 @@ document.addEventListener("DOMContentLoaded", () => {
         updateGameState();
     });
 });
+// Firebase Configuration and Initialization
+export const firebaseConfig = {
+  apiKey: "AIzaSyDoM2DyaxuSD-1vSiHGnZGkKpiEQAcH-M4",
+  authDomain: "leaderboard-3197e.firebaseapp.com",
+  projectId: "leaderboard-3197e",
+  storageBucket: "leaderboard-3197e.firebasestorage.app",
+  messagingSenderId: "74363128000",
+  appId: "1:74363128000:web:b398cf2849d17670914525",
+  measurementId: "G-5065D2Q9LM",
+};
+
+// Import and initialize Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// Firebase app initialization
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+// Authenticate user anonymously
+export function authenticateUser() {
+  signInAnonymously(auth)
+    .then(() => console.log("User signed in anonymously"))
+    .catch((error) => console.error("Authentication error:", error));
+}
+
+// Listen for Auth State Changes
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(`Authenticated as: ${user.uid}`);
+  } else {
+    authenticateUser();
+  }
+});

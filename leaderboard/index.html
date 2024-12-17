@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">Game</a>
+        <a href="/leaderboard">Leaderboard</a>
+    </nav>
+    <div class="container">
+        <h1>Leaderboard</h1>
+        <div id="leaderboard" class="leaderboard"></div>
+    </div>
+    
+  <script type="module">
+    import { app, db, authenticateUser } from "../script.js";
+    import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+    // Initialize authentication
+    authenticateUser();
+
+    // Add Score to Firestore
+    async function addScore(name, score) {
+      try {
+        await addDoc(collection(db, "leaderboard"), {
+          name: name,
+          score: score,
+          timestamp: serverTimestamp(),
+        });
+        console.log("Score added successfully!");
+      } catch (error) {
+        console.error("Error adding score:", error);
+      }
+    }
+
+    // Render Leaderboard
+    function renderLeaderboard(scores) {
+      const leaderboard = document.getElementById("leaderboard");
+      leaderboard.innerHTML = "";
+
+      scores.forEach((entry) => {
+        const date = entry.timestamp ? new Date(entry.timestamp.seconds * 1000).toLocaleString() : "Unknown";
+        const row = document.createElement("div");
+        row.className = "leaderboard-row";
+        row.innerHTML = `
+          <span>${entry.name}</span>
+          <span>${entry.score}</span>
+          <span>${date}</span>
+        `;
+        leaderboard.appendChild(row);
+      });
+    }
+
+    // Listen for Real-Time Updates
+    const leaderboardQuery = query(collection(db, "leaderboard"), orderBy("score", "desc"));
+    onSnapshot(leaderboardQuery, (snapshot) => {
+      const scores = [];
+      snapshot.forEach((doc) => scores.push(doc.data()));
+      renderLeaderboard(scores);
+    });
+
+    // Add Event Listener for Save Button
+    document.getElementById("save-score-btn").addEventListener("click", () => {
+      const playerName = document.getElementById("player-name").value.trim();
+      const score = parseInt(document.getElementById("player-score").value.trim(), 10);
+      if (playerName && !isNaN(score)) {
+        addScore(playerName, score);
+      } else {
+        alert("Please enter a valid name and score!");
+      }
+    });
+  </script>
+</body>
+</html>

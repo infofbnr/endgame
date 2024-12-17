@@ -9,8 +9,8 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="index.html">Game</a>
-        <a href="leaderboard.html">Leaderboard</a>
+        <a href="/">Game</a>
+        <a href="/leaderboard">Leaderboard</a>
     </nav>
 
     <!-- Game Container -->
@@ -35,104 +35,7 @@
             <button id="save-score-btn">Save</button>
         </div>
     </div>
-    <script type="module">
-        // Import Firebase and Firestore
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-      
-        // Firebase Configuration
-        const firebaseConfig = {
-          apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-          authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-          projectId: "leaderboard-3197e",
-          storageBucket: "leaderboard-3197e.firebasestorage.app",
-          messagingSenderId: "74363128000",
-          appId: "1:74363128000:web:b398cf2849d17670914525",
-          measurementId: "G-5065D2Q9LM",
-        };
-      
-        // Initialize Firebase and Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-      
-        // Initialize Firebase Authentication
-        const auth = getAuth(app);
-      
-        // Authenticate User Anonymously
-        function authenticateUser() {
-          signInAnonymously(auth)
-            .then(() => {
-              console.log("User signed in anonymously");
-            })
-            .catch((error) => {
-              console.error("Authentication error:", error);
-            });
-        }
-      
-        // Listen for Auth State Changes
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            console.log(`Authenticated as: ${user.uid}`);
-          } else {
-            authenticateUser();
-          }
-        });
-      
-        // Add Score to Firestore
-        async function addScore(name, score) {
-          try {
-            await addDoc(collection(db, "leaderboard"), {
-              name: name,
-              score: score,
-              timestamp: serverTimestamp(), // Use Firestore's serverTimestamp
-            });
-            console.log("Score added successfully!");
-          } catch (error) {
-            console.error("Error adding score:", error);
-          }
-        }
-      
-        // Render Leaderboard
-        function renderLeaderboard(scores) {
-          const leaderboard = document.getElementById("leaderboard");
-          leaderboard.innerHTML = ""; // Clear existing leaderboard
-      
-          scores.forEach((entry) => {
-            const date = entry.timestamp ? new Date(entry.timestamp.seconds * 1000).toLocaleString() : "Unknown";
-            const row = document.createElement("div");
-            row.className = "leaderboard-row";
-            row.innerHTML = `
-              <span>${entry.name}</span>
-              <span>${entry.score}</span>
-              <span>${date}</span>
-            `;
-            leaderboard.appendChild(row);
-          });
-        }
-      
-        // Listen for Real-Time Updates
-        const leaderboardQuery = query(collection(db, "leaderboard"), orderBy("score", "desc"));
-        onSnapshot(leaderboardQuery, (snapshot) => {
-          const scores = [];
-          snapshot.forEach((doc) => {
-            scores.push(doc.data());
-          });
-          renderLeaderboard(scores);
-        });
-      
-        // Example Usage: Add score when the "Save Score" button is clicked
-        document.getElementById("save-score-btn").addEventListener("click", () => {
-          const playerName = document.getElementById("player-name").value.trim();
-          const score = parseInt(document.getElementById("player-score").value.trim(), 10); // Example dynamic score input
-          if (playerName && !isNaN(score)) {
-            addScore(playerName, score);
-          } else {
-            alert("Please enter a valid name and score!");
-          }
-        });
-      </script>
-      
+    
     <script src="script.js"></script>
 </body>
 </html>
