@@ -54,31 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
-    function handleGameOver(message, score) {
-        alert(message); // Optional: Display the final message
-        openSaveScoreModal(score);
-    }
-
-    function openSaveScoreModal(score) {
-        modal.style.display = "flex";
-        saveScoreBtn.onclick = () => {
-            const playerName = playerNameInput.value.trim();
-            if (playerName) {
-                playerScores[playerName] = (playerScores[playerName] || 0) + score;
-                localStorage.setItem("playerScores", JSON.stringify(playerScores));
-                modal.style.display = "none";
-                playerNameInput.value = ""; // Clear input
-                window.location.reload(); // Restart the game
-            } else {
-                alert("Please enter your name to save your score.");
-            }
-        };
-    }
-
-    closeModalBtn.onclick = () => {
-        modal.style.display = "none";
-    };
-
     window.onclick = (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
