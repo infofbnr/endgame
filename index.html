@@ -9,7 +9,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="/">Game</a>
+        <a href="/endgame">Game</a>
         <a href="/endgame/leaderboard">Leaderboard</a>
     </nav>
 
@@ -35,7 +35,55 @@
             <button id="save-score-btn">Save</button>
         </div>
     </div>
-    
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDoM2DyaxuSD-1vSiHGnZGkKpiEQAcH-M4",
+        authDomain: "leaderboard-3197e.firebaseapp.com",
+        projectId: "leaderboard-3197e",
+        storageBucket: "leaderboard-3197e.firebasestorage.app",
+        messagingSenderId: "74363128000",
+        appId: "1:74363128000:web:b398cf2849d17670914525",
+        measurementId: "G-5065D2Q9LM"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialize Firestore
+    const db = getFirestore(app);
+
+    // Function to add a score to Firestore
+    async function addScore(name, score) {
+        try {
+        await addDoc(collection(db, "leaderboard"), {
+            name: name,
+            score: score,
+            timestamp: new Date()
+        });
+        console.log("Score added successfully!");
+        } catch (error) {
+        console.error("Error adding score: ", error);
+        }
+    }
+
+    // Example usage
+    document.getElementById("save-score-btn").addEventListener("click", () => {
+        const playerName = document.getElementById("player-name").value.trim();
+        const score = 50; // Replace with dynamic score
+        if (playerName) {
+        addScore(playerName, score);
+        } else {
+        alert("Please enter a name!");
+        }
+    });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
