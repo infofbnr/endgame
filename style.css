@@ -2,12 +2,15 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align elements to the top */
+    align-items: center; /* Center horizontally */
+    min-height: 100vh; /* Ensure the body spans the full height */
     margin: 0;
+    padding: 20px 0; /* Optional: Add some padding */
     background-color: #f0f0f0;
 }
+
 
 .container {
     background-color: #fff;
@@ -154,9 +157,52 @@ button:hover {
     cursor: pointer;
 }
 
-/* Body content below navbar */
+.faq {
+    max-width: 600px;
+    margin: 80px auto; /* Ensure proper spacing below navbar */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.faq h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.faq-item h2 {
+    margin: 0;
+    font-size: 18px;
+    cursor: pointer;
+    color: #646cda;
+    transition: color 0.3s ease;
+}
+
+.faq-item h2:hover {
+    color: #444;
+}
+
+.faq-item .answer {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    display: none; /* Initially hidden */
+}
+
+
+
 .container {
-    margin-top: 60px; /* Add space below the navbar */
+    margin-top: 20px; /* Space between FAQ and container */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -164,4 +210,3 @@ button:hover {
     width: 300px;
     text-align: center;
 }
-

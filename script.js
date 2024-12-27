@@ -1,1 +1,145 @@
-(function(_0x56efba,_0x4f4e14){const _0x392a33=_0xf063,_0x3486fc=_0x56efba();while(!![]){try{const _0x47ebb5=-parseInt(_0x392a33(0x95))/0x1*(parseInt(_0x392a33(0xb3))/0x2)+-parseInt(_0x392a33(0xbc))/0x3*(parseInt(_0x392a33(0xa8))/0x4)+-parseInt(_0x392a33(0xbb))/0x5+-parseInt(_0x392a33(0xad))/0x6*(-parseInt(_0x392a33(0x9b))/0x7)+parseInt(_0x392a33(0xa2))/0x8+parseInt(_0x392a33(0x9f))/0x9+parseInt(_0x392a33(0xbd))/0xa;if(_0x47ebb5===_0x4f4e14)break;else _0x3486fc['push'](_0x3486fc['shift']());}catch(_0x4c698d){_0x3486fc['push'](_0x3486fc['shift']());}}}(_0x8cd0,0x2ccde),document['addEventListener']('DOMContentLoaded',()=>{const _0x286182=_0xf063;async function _0x542b6f(_0x2d4a9d){const _0xf5588c=_0xf063,_0x5948e3=await fetch(_0x2d4a9d),_0x29bbcf=await _0x5948e3[_0xf5588c(0xa4)]();return _0x29bbcf['split']('\x0a')['map'](_0x2b0c0c=>_0x2b0c0c[_0xf5588c(0x9a)]()['toLowerCase']())[_0xf5588c(0xb9)](_0x5264ac=>/^[a-z]+$/[_0xf5588c(0xa9)](_0x5264ac)&&_0x5264ac[_0xf5588c(0xa0)]>0x0);}let _0x4d5429=[],_0x5cd29a='',_0x4864c7=[],_0x23d12c=new Set(),_0x51c8f1=0x3;const _0x197f5d=document['getElementById']('generated-word'),_0x46055b=document[_0x286182(0xbe)](_0x286182(0xae)),_0x50c7f3=document['getElementById']('lives'),_0x24c96c=document['getElementById']('error-message'),_0x312777=document['getElementById']('user-word'),_0x1c0b4f=document['getElementById'](_0x286182(0x94));function _0x161a46(){const _0x566ec0=_0x286182,_0x1ca2aa=JSON['parse'](localStorage[_0x566ec0(0xaf)](_0x566ec0(0xa1)));_0x1ca2aa?(_0x4864c7=_0x1ca2aa[_0x566ec0(0xae)]||[],_0x51c8f1=_0x1ca2aa['lives']||0x3,_0x5cd29a=_0x1ca2aa['generatedWord']||_0x566ec0(0xa6)):(_0x4864c7=[],_0x51c8f1=0x3,_0x5cd29a=_0x566ec0(0xa6));}function _0x3c1b82(){const _0x55cd54=_0x286182;localStorage[_0x55cd54(0xbf)]('gameState',JSON[_0x55cd54(0x93)]({'history':_0x4864c7,'lives':_0x51c8f1,'generatedWord':_0x5cd29a}));}function _0x1a7540(){const _0x47e189=_0x286182;return _0x4d5429[Math['floor'](Math['random']()*_0x4d5429[_0x47e189(0xa0)])];}function _0x4c9956(){const _0x464bdd=_0x286182;_0x197f5d[_0x464bdd(0xb5)]=_0x464bdd(0x97)+_0x5cd29a,_0x46055b[_0x464bdd(0xb5)]='History:\x20'+_0x4864c7[_0x464bdd(0xb2)](_0x464bdd(0xb6)),_0x50c7f3[_0x464bdd(0xb5)]=_0x464bdd(0xa3)+_0x51c8f1,_0x3c1b82();}function _0x30b28a(_0x1e8a4b){const _0x52a039=_0x286182,_0x9a53ca=_0x1e8a4b['toLowerCase']();if(!_0x4d5429[_0x52a039(0xb7)](_0x9a53ca))return _0x52a039(0x9d);if(_0x23d12c['has'](_0x9a53ca))return _0x52a039(0xb4);if(_0x9a53ca['charAt'](0x0)!==_0x5cd29a[_0x52a039(0x99)](_0x5cd29a[_0x52a039(0xa0)]-0x1))return _0x52a039(0x9e)+_0x5cd29a[_0x52a039(0x99)](_0x5cd29a[_0x52a039(0xa0)]-0x1)+'\x27\x20but\x20starts\x20with\x20\x27'+_0x9a53ca['charAt'](0x0)+'\x27.';return!![];}_0x1c0b4f[_0x286182(0xb1)](_0x286182(0x9c),_0x553907=>{const _0x254e3b=_0x286182;_0x553907[_0x254e3b(0x98)]();const _0x4f3474=_0x312777[_0x254e3b(0xaa)][_0x254e3b(0x9a)]()[_0x254e3b(0xa5)](),_0x2ad31c=_0x30b28a(_0x4f3474);if(_0x2ad31c===!![]){_0x23d12c['add'](_0x4f3474),_0x4864c7[_0x254e3b(0xac)](_0x4f3474),_0x24c96c['textContent']='';const _0xfab76d=_0x4f3474[_0x254e3b(0x99)](_0x4f3474[_0x254e3b(0xa0)]-0x1),_0x3f8b53=_0x4d5429[_0x254e3b(0xb9)](_0x2398e6=>_0x2398e6[_0x254e3b(0x96)](_0xfab76d)&&!_0x23d12c[_0x254e3b(0xb0)](_0x2398e6));_0x3f8b53[_0x254e3b(0xa0)]>0x0?_0x5cd29a=_0x3f8b53[Math[_0x254e3b(0xba)](Math[_0x254e3b(0xa7)]()*_0x3f8b53['length'])]:_0x22a637('No\x20more\x20words\x20available.\x20You\x20win!',_0x4864c7[_0x254e3b(0xa0)]);}else _0x24c96c[_0x254e3b(0xb5)]=_0x2ad31c,_0x51c8f1>0x0&&(_0x51c8f1-=0x1,_0x51c8f1===0x0&&_0x22a637('Game\x20over!\x20You\x27ve\x20run\x20out\x20of\x20lives.',_0x4864c7[_0x254e3b(0xa0)]));_0x4c9956(),_0x312777[_0x254e3b(0xaa)]='';});function _0x22a637(_0x155bf9,_0xe467a6){const _0x6866cf=_0x286182;alert(_0x155bf9+_0x6866cf(0xc0)+_0xe467a6),_0x4fe79b();}function _0x4fe79b(){_0x4864c7=[],_0x23d12c=new Set(),_0x51c8f1=0x3,_0x5cd29a=_0x1a7540(),_0x3c1b82(),_0x4c9956();}_0x161a46(),_0x542b6f(_0x286182(0xb8))[_0x286182(0xab)](_0x442f42=>{const _0x20966c=_0x286182;_0x4d5429=_0x442f42,_0x5cd29a===_0x20966c(0xa6)&&(_0x5cd29a=_0x1a7540()),_0x4c9956();});}));function _0xf063(_0x40598c,_0x14dac3){const _0x8cd08c=_0x8cd0();return _0xf063=function(_0xf063cc,_0x50ed4a){_0xf063cc=_0xf063cc-0x93;let _0x240184=_0x8cd08c[_0xf063cc];return _0x240184;},_0xf063(_0x40598c,_0x14dac3);}function _0x8cd0(){const _0x589628=['textContent','\x20->\x20','includes','wordlist.txt','filter','floor','1251220nqUsEG','12kqIVoQ','4179340tkhFNE','getElementById','setItem','\x20Your\x20score:\x20','stringify','game-form','4770yAveQX','startsWith','The\x20generated\x20word\x20is:\x20','preventDefault','charAt','trim','35VCgSvy','submit','The\x20word\x20is\x20not\x20in\x20the\x20word\x20list.','The\x20word\x20must\x20start\x20with\x20\x27','2826036hqMjpO','length','gameState','1239384oJLzEt','Lives:\x20','text','toLowerCase','start','random','340744bflTnR','test','value','then','push','48342mFyPyQ','history','getItem','has','addEventListener','join','64RCucaR','You\x20already\x20used\x20this\x20word.'];_0x8cd0=function(){return _0x589628;};return _0x8cd0();}
+document.addEventListener('DOMContentLoaded', () => {
+    // Load word list from an external file
+    async function fetchWordList(url) {
+        const response = await fetch(url);
+        const text = await response.text();
+        return text.split('\n')
+            .map(word => word.trim().toLowerCase())
+            .filter(word => /^[a-z]+$/.test(word) && word.length > 0); // Adjust for Armenian alphabet
+    }
+    const faqItems = document.querySelectorAll('.faq-item h2');
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.nextElementSibling;
+
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        });
+    });
+    
+    let wordList = [];
+    let generatedWord = '';
+    let history = [];
+    let usedWords = new Set();
+    let lives = 3;
+
+    // DOM elements
+    const generatedWordElement = document.getElementById('generated-word');
+    const historyElement = document.getElementById('history');
+    const livesElement = document.getElementById('lives');
+    const errorMessageElement = document.getElementById('error-message');
+    const userWordInput = document.getElementById('user-word');
+    const gameForm = document.getElementById('game-form');
+
+    // Load game state from localStorage
+    function loadGameState() {
+        const savedState = JSON.parse(localStorage.getItem('gameState'));
+        if (savedState) {
+            history = savedState.history || [];
+            lives = savedState.lives || 3;
+            generatedWord = savedState.generatedWord || 'start'; // Armenian default start
+        } else {
+            resetGame();
+        }
+    }
+
+    // Save game state to localStorage
+    function saveGameState() {
+        localStorage.setItem('gameState', JSON.stringify({
+            history,
+            lives,
+            generatedWord
+        }));
+    }
+
+    // Pick a random word from the word list
+    function pickRandomWord() {
+        return wordList[Math.floor(Math.random() * wordList.length)];
+    }
+
+    // Update the DOM with current game state
+    function updateUI() {
+        generatedWordElement.textContent = `The generated word is: ${generatedWord}`;
+        historyElement.textContent = `History: ${history.join(' -> ')}`;
+        livesElement.textContent = `Lives: ${lives}`;
+        saveGameState();
+    }
+
+    // Check if the user's word is valid
+    function validateWord(userWord) {
+        const lowerWord = userWord.toLowerCase();
+        if (!wordList.includes(lowerWord)) {
+            return 'The word is not in the word list.';
+        }
+        if (usedWords.has(lowerWord)) {
+            return 'You already used this word.';
+        }
+        if (lowerWord.charAt(0) !== generatedWord.charAt(generatedWord.length - 1)) {
+            return `The word must start with '${generatedWord.charAt(generatedWord.length - 1)}' but starts with '${lowerWord.charAt(0)}'.`;
+        }
+        return true;
+    }
+
+    // End the game with a message
+    function endGame(message, score) {
+        alert(`${message} Your score: ${score}`);
+        resetGame();
+    }
+
+    // Reset the game state
+    function resetGame() {
+        history = [];
+        usedWords = new Set();
+        lives = 3;
+        generatedWord = pickRandomWord();
+        saveGameState();
+        updateUI();
+    }
+
+    // Handle game form submission
+    gameForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const userWord = userWordInput.value.trim().toLowerCase();
+        const validationResult = validateWord(userWord);
+
+        if (validationResult === true) {
+            usedWords.add(userWord);
+            history.push(userWord);
+            errorMessageElement.textContent = '';
+
+            const nextLetter = userWord.charAt(userWord.length - 1);
+            const nextWords = wordList.filter(word => word.startsWith(nextLetter) && !usedWords.has(word));
+
+            if (nextWords.length > 0) {
+                generatedWord = nextWords[Math.floor(Math.random() * nextWords.length)];
+            } else {
+                endGame('No more words available. You win!', history.length);
+            }
+        } else {
+            errorMessageElement.textContent = validationResult;
+            if (lives > 0) {
+                lives -= 1;
+                if (lives === 0) {
+                    endGame("Game over! You've run out of lives.", history.length);
+                }
+            }
+        }
+
+        updateUI();
+        userWordInput.value = '';
+    });
+
+    // Initialize game state
+    loadGameState();
+    fetchWordList('wordlist.txt').then(loadedWordList => {
+        wordList = loadedWordList;
+        if (generatedWord === 'start') {
+            generatedWord = pickRandomWord();
+        }
+        updateUI();
+    });
+});
