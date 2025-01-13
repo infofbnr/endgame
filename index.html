@@ -28,7 +28,15 @@
             <p class="answer">Yes, these words may be a little bit complex and unfamiliar. This is due to the word list containing more than 350,000 words, so some of them will be Middle English.</p>
         </div>
     </div>
-    
+    <!-- Add this to your container above the game form -->
+    <div class="mode-selection">
+        <button id="timed-mode" class="mode-button">Timed Mode</button>
+        <button id="untimed-mode" class="mode-button">Untimed Mode</button>
+    </div>
+
+    <!-- Add this below the form to display the timer -->
+    <p id="timer" class="timer" style="display: none;">Time Left: <span id="time-left"></span> seconds</p>
+
     <!-- Game Container -->
     <div class="container">
         <h1>English Endgame</h1>

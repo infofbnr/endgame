@@ -250,3 +250,38 @@ button:hover {
     width: 300px;
     text-align: center;
 }
+/* Mode selection buttons */
+.mode-selection {
+    margin-bottom: 20px;
+}
+
+.mode-button {
+    padding: 10px 15px;
+    background-color: #646cda;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.mode-button:hover {
+    background-color: #4b53b6;
+    transform: scale(1.05);
+}
+
+.mode-button:active {
+    transform: scale(1);
+    background-color: #323874;
+}
+
+/* Timer display */
+.timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}

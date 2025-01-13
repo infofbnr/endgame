@@ -132,7 +132,54 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI();
         userWordInput.value = '';
     });
+    let timerInterval;
+    const timerElement = document.getElementById('timer');
+    const timeLeftElement = document.getElementById('time-left');
+    const timedModeButton = document.getElementById('timed-mode');
+    const untimedModeButton = document.getElementById('untimed-mode');
+    let timeLeft = 60; // Default time for timed mode in seconds
 
+    // Function to start the timer
+    function startTimer() {
+        timerElement.style.display = 'block';
+        timeLeft = 60;
+        updateTimerUI();
+
+        timerInterval = setInterval(() => {
+            timeLeft -= 1;
+            updateTimerUI();
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endGame("Time's up! Game over!", history.length);
+            }
+        }, 1000);
+    }
+
+    // Update timer UI
+    function updateTimerUI() {
+        timeLeftElement.textContent = timeLeft;
+    }
+
+    // Stop the timer
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerElement.style.display = 'none';
+    }
+
+    // Event listeners for mode selection
+    timedModeButton.addEventListener('click', () => {
+        resetGame();
+        startTimer();
+    });
+
+    untimedModeButton.addEventListener('click', () => {
+        resetGame();
+        stopTimer();
+    });
+
+    // Initialize game state as untimed by default
+    stopTimer();
     // Initialize game state
     loadGameState();
     fetchWordList('wordlist.txt').then(loadedWordList => {
