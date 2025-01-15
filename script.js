@@ -84,12 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    // End the game with a message
-    function endGame(message, score) {
-        alert(`${message} Your score: ${score}`);
-        resetGame();
-    }
-
     // Reset the game state
     function resetGame() {
         history = [];
@@ -189,5 +183,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateUI();
     });
+    function endGame(message, score) {
+        stopTimer(); // Ensure timer stops
+        const username = prompt("Enter your username:") || "Guest";
+        updateLeaderboard(username, score); // Save to leaderboard
+        alert(`${message} Your score: ${score}`);
+        resetGame();
+    }
     
+    // Save player score to leaderboard
+    function updateLeaderboard(username, score) {
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    
+        const existingUserIndex = leaderboard.findIndex(
+            (entry) => entry.username === username
+        );
+    
+        if (existingUserIndex !== -1) {
+            if (leaderboard[existingUserIndex].score < score) {
+                leaderboard[existingUserIndex].score = score;
+            }
+        } else {
+            leaderboard.push({ username, score });
+        }
+    
+        leaderboard.sort((a, b) => b.score - a.score);
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    }
+
 });
