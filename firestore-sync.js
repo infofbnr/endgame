@@ -1,10 +1,7 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import {
-    getFirestore
-} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";  // Make sure this is included
 
-// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDoM2DyaxuSD-1vSiHGnZGkKpiEQAcH-M4",
     authDomain: "leaderboard-3197e.firebaseapp.com",
@@ -15,46 +12,53 @@ const firebaseConfig = {
     measurementId: "G-5065D2Q9LM"
 };
 
-// ✅ Only initialize Firebase if it hasn't been initialized before
+// Initialize Firebase (only once)
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export { db, auth };
+// Function to sync leaderboard with Firestore
+async function syncLeaderboardToFirestore() {
+    const user = auth.currentUser;
+    if (!user) return; // Don't store if user isn't signed in
 
-// Sync leaderboard with Firestore
-async function updateScore(username, newScore) {
-    if (!username || username.toLowerCase() === "guest") return; 
+    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-    const userRef = doc(db, "leaderboard", username);
-    try {
-        const docSnap = await getDoc(userRef);
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            if (newScore > data.score) {
-                await updateDoc(userRef, { score: newScore });
-                console.log(`✅ Score updated for ${username}`);
-            } else {
-                console.log(`⚠️ Not updating: ${newScore} is lower than ${data.score}`);
-            }
-        } else {
-            await setDoc(userRef, { username, score: newScore });
-            console.log(`🆕 Added ${username} to Firestore leaderboard.`);
+    for (const entry of leaderboard) {
+        if (!entry.username || entry.username.toLowerCase() === "guest") {
+            console.warn("Skipping invalid username:", entry.username);
+            continue;
         }
-    } catch (error) {
-        console.error("❌ Firestore update error:", error);
+
+        const userRef = doc(db, "leaderboard", entry.username);
+        try {
+            const docSnap = await getDoc(userRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if (entry.score > data.score) {
+                    await setDoc(userRef, { username: entry.username, score: entry.score }, { merge: true });
+                    console.log(`✅ Updated score for ${entry.username} in Firestore.`);
+                } else {
+                    console.log(`⚠️ Score not updated: ${entry.score} is not higher than ${data.score}.`);
+                }
+            } else {
+                await setDoc(userRef, { username: entry.username, score: entry.score });
+                console.log(`🆕 New user ${entry.username} added to Firestore leaderboard.`);
+            }
+        } catch (error) {
+            console.error("❌ Error updating Firestore leaderboard:", error);
+        }
     }
 }
 
-// Listen for auth changes and sync leaderboard
+// Listen for auth state changes and sync leaderboard when a user is signed in
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log("User signed in, checking leaderboard sync...");
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-        if (leaderboard.length > 0) {
-            syncLeaderboardToFirestore();
-        }
+        console.log("User signed in, syncing leaderboard...");
+        syncLeaderboardToFirestore();
+    } else {
+        console.log("No user signed in.");
     }
 });
 
@@ -65,11 +69,3 @@ window.addEventListener("storage", (event) => {
         syncLeaderboardToFirestore();
     }
 });
-
-// Check every 10 seconds in case storage event doesn't fire
-setInterval(() => {
-    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    if (leaderboard.length > 0) {
-        syncLeaderboardToFirestore();
-    }
-}, 10000);
