@@ -32,7 +32,6 @@ async function syncLeaderboardToFirestore() {
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     
     for (const entry of leaderboard) {
-        // ⛔ Prevent adding "Guest" or invalid usernames
         if (!entry.username || entry.username.toLowerCase() === "guest") {
             console.warn("Skipping invalid username:", entry.username);
             continue;
@@ -44,18 +43,21 @@ async function syncLeaderboardToFirestore() {
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 if (entry.score > data.score) {
-                    await setDoc(userRef, { username: entry.username, score: entry.score });
-                    console.log(`Updated score for ${entry.username} in Firestore.`);
+                    await setDoc(userRef, { username: entry.username, score: entry.score }, { merge: true });
+                    console.log(`✅ Updated score for ${entry.username} in Firestore.`);
+                } else {
+                    console.log(`⚠️ Score not updated: ${entry.score} is not higher than ${data.score}.`);
                 }
             } else {
                 await setDoc(userRef, { username: entry.username, score: entry.score });
-                console.log(`New user ${entry.username} added to Firestore leaderboard.`);
+                console.log(`🆕 New user ${entry.username} added to Firestore leaderboard.`);
             }
         } catch (error) {
-            console.error("Error updating Firestore leaderboard:", error);
+            console.error("❌ Error updating Firestore leaderboard:", error);
         }
     }
 }
+
 
 
 
