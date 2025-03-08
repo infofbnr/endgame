@@ -13,6 +13,28 @@
         <a href="/leaderboard">Leaderboard</a>
         <a href="/words">Words</a>
     </nav>
+    <div class="auth-container">
+        <div id="auth-form">
+            <h2>Sign Up</h2>
+            <input type="text" id="username" placeholder="Username (Optional)" />
+            <input type="email" id="signUpEmail" placeholder="Email" />
+            <input type="password" id="signUpPassword" placeholder="Password" />
+            <button id="signUpButton">Sign Up</button>
+        
+            <h2>Sign In</h2>
+            <input type="email" id="signInEmail" placeholder="Email" />
+            <input type="password" id="signInPassword" placeholder="Password" />
+            <button id="signInButton">Sign In</button>
+        
+            <button id="signOutButton" style="display:none;">Sign Out</button>
+            <p id="auth-status">Not signed in</p>
+        </div>
+    </div>
+    <!-- Include Authentication Script -->
+    <script type="module" src="auth.js"></script>
+    <!-- Sign-out Button -->
+<button id="signOutButton" class="hidden" onclick="signOut()">Sign Out</button>
+
     <div class="faq">
         <h1>Frequently Asked Questions</h1>
         <div class="faq-item">
@@ -29,15 +51,15 @@
         </div>
     </div>
     <!-- Add this to your container above the game form -->
+<!-- Game Container (Hidden by Default) -->
+<div id="game-container" class="hidden">
     <div class="mode-selection">
         <button id="timed-mode" class="mode-button">Timed Mode</button>
         <button id="untimed-mode" class="mode-button">Untimed Mode</button>
     </div>
 
-    <!-- Add this below the form to display the timer -->
     <p id="timer" class="timer" style="display: none;">Time Left: <span id="time-left"></span> seconds</p>
 
-    <!-- Game Container -->
     <div class="container">
         <h1>English Endgame</h1>
         <p id="generated-word">The generated word is: </p>
@@ -49,8 +71,11 @@
         <p id="error-message" class="error-message"></p>
         <p id="history">History: </p>
     </div>
+</div>
 
 
     <script src="script.js"></script>
+    <script type="module" src="firestore-sync.js"></script>
+
 </body>
 </html>

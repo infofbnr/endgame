@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="/">Game</a>
-        <a href="/leaderboard">Leaderboard</a>
-        <a href="/words">Words</a>
-    </nav>
+  <!-- Navbar (you can reuse your shared navbar styles) -->
+  <nav class="navbar">
+    <a href="/">Game</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/words">Words</a>
+  </nav>
 
-    <!-- Leaderboard Container -->
     <div class="leaderboard-container">
-        <h1>Leaderboard</h1>
-        <ul id="leaderboard-list">
-            <!-- Leaderboard Entries Will Be Inserted Here -->
-        </ul>
+        <h2 class="leaderboard-title">Leaderboard</h2>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Players will be added here dynamically -->
+            </tbody>
+        </table>
     </div>
 
-    <!-- Include leaderboard logic -->
-    <script src="leaderboard.js"></script>
+    <script type="module" src="leaderboard.js"></script>
 </body>
 </html>
