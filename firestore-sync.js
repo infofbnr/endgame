@@ -24,7 +24,7 @@ const auth = getAuth(app);
 export { db, auth };
 
 // Sync leaderboard with Firestore
-async function syncLeaderboardToFirestore(username, newScore) {
+async function updateScore(username, newScore) {
     if (!username || username.toLowerCase() === "guest") return; 
 
     const userRef = doc(db, "leaderboard", username);
