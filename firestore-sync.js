@@ -1,14 +1,10 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import {
-    getFirestore,
-    doc,
-    setDoc,
-    getDoc,
-    updateDoc
+    getFirestore
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
-// Initialize Firebase
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDoM2DyaxuSD-1vSiHGnZGkKpiEQAcH-M4",
     authDomain: "leaderboard-3197e.firebaseapp.com",
@@ -18,9 +14,13 @@ const firebaseConfig = {
     appId: "1:74363128000:web:b398cf2849d17670914525",
     measurementId: "G-5065D2Q9LM"
 };
-const app = initializeApp(firebaseConfig);
+
+// ✅ Only initialize Firebase if it hasn't been initialized before
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
 const db = getFirestore(app);
 const auth = getAuth(app);
+
 export { db, auth };
 
 // Sync leaderboard with Firestore
